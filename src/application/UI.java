@@ -4,10 +4,7 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import chess.ChessMatch;
 import chess.ChessPiece;
@@ -69,10 +66,18 @@ public class UI {
 		System.out.println();
 		printCapturedPieces(captured);
 		System.out.println("\nTurn: "+ chessMatch.getTurn());
-		System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
-		if(chessMatch.getCheck()){
-			System.out.println("CHECK!");
+		if(!chessMatch.getCheckMate()){
+			
+			System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
+			if(chessMatch.getCheck()){
+				System.out.println("CHECK!");
+			}
 		}
+		else{
+			System.out.println("CHECKMATE!");
+			System.out.println("Winner: "+ chessMatch.getCurrentPlayer());
+		}
+		
 	}
 
 	public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
